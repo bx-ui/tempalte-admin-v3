@@ -17,7 +17,7 @@ module.exports = {
   ],
   // 步骤
   // git cz
-  message: {
+  messages: {
     type: '请选择提交的类型',
     customScope: '请输入修改的范围',
     subject: '请简要描述提交(必填)',
@@ -26,7 +26,7 @@ module.exports = {
     confirmCommit: '确认要使用以上信息提交嘛(Y/N)'
   },
   // 跳过步骤
-  skipQuestions: ['body', 'footer'],
+  // skipQuestions: ['body', 'footer'],
   // 默认长度为72（长度限制）
   subjectLimit: 72
 }
