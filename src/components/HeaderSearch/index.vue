@@ -3,7 +3,9 @@
     <svg-icon
     class-name="search-icon"
     icon="search"
-    @click.stop="onShowClick"></svg-icon>
+    @click.stop="onShowClick"
+    id="guide-search">
+    </svg-icon>
     <el-select
     ref="headerSearchSelectRef"
     class="header-search-select"

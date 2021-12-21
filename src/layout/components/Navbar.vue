@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
     <hamburger class="hamburger-container" />
-    <breadcrumb class="breadcrumb-container" />
+    <breadcrumb id="guide-breadcrumb" class="breadcrumb-container" />
     <div class="right-menu">
+      <!-- 引导 -->
+      <guide class="right-menu-item hover-effect" />
       <!-- 全局搜索 -->
       <header-search class="right-menu-item hover-effect" />
       <!-- 全屏 -->
@@ -47,6 +49,7 @@ import LangSelect from '@/components/LangSelect/index.vue'
 import ThemePicker from '@/components/ThemeSelect/index.vue'
 import ScreenFull from '@/components/Screenfull/index.vue'
 import HeaderSearch from '@/components/HeaderSearch/index.vue'
+import Guide from '@/components/Guide/index.vue'
 const store = useStore()
 const logout = () => {
   store.dispatch('user/logout')

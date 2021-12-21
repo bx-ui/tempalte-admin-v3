@@ -18,7 +18,9 @@ const getters = {
   // 国际化
   language: state => state.app.language,
   // 主题色
-  mainColor: state => state.theme.mainColor
+  mainColor: state => state.theme.mainColor,
+  // tags数组
+  tagsViewList: state => state.app.tagsViewList
 }
 
 export default getters

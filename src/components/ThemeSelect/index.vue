@@ -6,7 +6,7 @@
   @command="handleSetTheme"
   >
     <div>
-       <svg-icon icon="change-theme" />
+       <svg-icon icon="change-theme" id="guide-theme" />
     </div>
     <template #dropdown>
       <el-dropdown-menu>

@@ -1,28 +1,55 @@
 <template>
-  <div class="">
-    {{ $t('msg.test') }}
-     <el-pagination
-      :page-size="100"
-      layout="total, prev, pager, next"
-      :total="1000"
-    />
-    <el-row>
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-    <el-button>中文</el-button>
-  </el-row>
+  <div class="my-container">
+    <el-row :gutter="20">
+      <el-col :span="6">
+        <el-card>
+          <template #header>
+            <h3>{{ $t('msg.profile.introduce') }}</h3>
+          </template>
+          <project-card class="user-card" :feature="featureSource" />
+        </el-card>
+      </el-col>
+      <el-col :span="18">
+        <el-card>
+          <template #header>
+            <el-tabs v-model="activeName">
+              <el-tab-pane :label="$t('msg.profile.feature')" name="feature">
+                <feature />
+              </el-tab-pane>
+              <el-tab-pane :label="$t('msg.profile.chapter')" name="chapter">
+                <chapter />
+              </el-tab-pane>
+              <el-tab-pane :label="$t('msg.profile.author')" name="author">
+                <author />
+              </el-tab-pane>
+            </el-tabs>
+          </template>
+        </el-card>
+      </el-col>
+    </el-row>
   </div>
 </template>
 
 <script setup>
-import {} from 'vue'
-import { generateNewStyle } from '@/utils/theme'
+import { ref } from 'vue'
+import ProjectCard from './components/ProjectCard.vue'
+import feature from './components/feature.vue'
+import chapter from './components/chapter.vue'
+import author from './components/author.vue'
+import { feature as featureList } from '@/api/user'
+import { watchSwitchLang } from '@/utils/i18n'
 
-generateNewStyle('#f0f0f0')
+const activeName = ref('feature')
+const featureSource = ref([])
+
+const loadFeature = async () => {
+  featureSource.value = await featureList()
+}
+
+watchSwitchLang(loadFeature)
+
+loadFeature()
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+</style>

@@ -14,7 +14,16 @@ router.beforeEach(async (to, from, next) => {
     } else {
       // 判断用户资料是否获取
       if (!store.getters.hasUserInfo) {
-        await store.dispatch('user/getUserInfo')
+        // 触发获取用户信息的 action，并获取用户当前权限
+        const { permission } = await store.dispatch('user/getUserInfo')
+        // 处理用户权限，筛选出需要添加的权限
+        const filterRouter = await store.dispatch('permission/filterRoutes', permission.menus)
+        // 利用 addRoute 循环添加
+        filterRouter.forEach(item => {
+          router.addRoute(item)
+        })
+        // 添加完动态路由之后，需要在进行一次主动跳转
+        return next(to.path)
       }
       next()
     }

@@ -11,6 +11,8 @@
       <div class="fixed-header">
         <!-- 顶部的 navbar -->
         <navbar />
+        <!-- tagsView -->
+        <tags-view id="guide-tags" />
       </div>
       <!-- 内容区 -->
       <app-main />
@@ -22,6 +24,7 @@
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar'
 import AppMain from './components/AppMain.vue'
+import TagsView from '@/components/TagsView/index.vue'
 // ::export scss 和 js可以进行结合
 </script>
 

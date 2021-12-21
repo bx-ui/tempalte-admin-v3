@@ -1,6 +1,6 @@
 <template>
   <div class="hamburger-container" @click="triggerClick">
-    <svg-icon :icon="icon" class="hamburger"></svg-icon>
+    <svg-icon :icon="icon" class="hamburger" id="guide-hamburger"></svg-icon>
   </div>
 </template>
 

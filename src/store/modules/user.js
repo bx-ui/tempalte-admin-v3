@@ -2,7 +2,7 @@ import { login, userInfo } from '@/api/sys'
 import md5 from 'md5'
 import { setItem, getItem, removeAllItem } from '@/utils/storage'
 import { TOKEN } from '@/constant/index'
-import router from '@/router'
+import router, { resetRouter } from '@/router'
 import { setTimeStamp } from '@/utils/auth'
 
 export default {
@@ -51,9 +51,13 @@ export default {
      * 退出登录
      */
     logout(context) {
+      // 重置路由表
+      resetRouter()
       // 清除用户 / 权限的一切东西
       this.commit('user/setToken', '')
       this.commit('user/setUserInfo', {})
+      // 清空tagViews数组
+      this.commit('app/removeTagsView', { type: 'all' })
       removeAllItem()
       router.push({ path: '/login' })
     }
