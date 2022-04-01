@@ -15,9 +15,11 @@ router.beforeEach(async (to, from, next) => {
       // 判断用户资料是否获取
       if (!store.getters.hasUserInfo) {
         // 触发获取用户信息的 action，并获取用户当前权限
-        const { permission } = await store.dispatch('user/getUserInfo')
+        await store.dispatch('user/getUserInfo')
+        // 获取用户路由权限
+        const menus = await store.dispatch('user/loadMenus')
         // 处理用户权限，筛选出需要添加的权限
-        const filterRouter = await store.dispatch('permission/filterRoutes', permission.menus)
+        const filterRouter = await store.dispatch('permission/filterRoutes', menus)
         // 利用 addRoute 循环添加
         filterRouter.forEach(item => {
           router.addRoute(item)

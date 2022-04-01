@@ -4,19 +4,32 @@ function resolve(dir) {
 }
 
 const devHost = '127.0.0.1'
+const port = 8013 // 端口配置
+const targetOrigin = 'https://120.92.16.17'
+const publicPath = '/' + process.env.VUE_APP_PUBLIC_URL
 
 module.exports = {
+  publicPath,
   devServer: {
+    host: devHost,
+    port: port,
+    https: false,
+    open: false,
     proxy: {
-      // 测试地址
-      '/api': {
-        target: 'https://api.imooc-admin.lgdsunday.club/',
+      // 测试地址12
+      // '/api': {
+      //   target: 'https://api.imooc-admin.lgdsunday.club/',
+      //   changeOrigin: true
+      // },
+      '/user-server': {
+        target: targetOrigin,
         changeOrigin: true
       },
       '/auth-server': {
-        target: process.env.VUE_APP_BASE_API,
+        target: targetOrigin,
         changeOrigin: true,
         onProxyRes: function(proxyRes, req, res) {
+          console.log(proxyRes)
           const cookies = proxyRes.headers['set-cookie']
           if (cookies) {
             // 替换IP地址

@@ -16,11 +16,12 @@
       <!-- 头像 -->
       <el-dropdown class="avator-container" trigger="click">
         <div class="avatar-wrapper">
-          <el-avatar
+          <!-- <el-avatar
           shape="square"
           :size="40"
           :src="$store.getters.userInfo.avatar">
-          </el-avatar>
+          </el-avatar> -->
+          {{ $store.getters.userInfo.name }}
           <i class="el-icon-s-tools"></i>
         </div>
         <template #dropdown>

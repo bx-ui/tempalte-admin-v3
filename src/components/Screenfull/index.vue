@@ -9,24 +9,24 @@
 
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
-import screenfull from 'screenfull'
+// import screenfull from 'screenfull'
 
 const isFullscreen = ref(false)
 
 const onToggle = () => {
-  screenfull.toggle()
+  // screenfull.toggle()
 }
 
-const change = () => {
-  isFullscreen.value = screenfull.isFullscreen
-}
+// const change = () => {
+//   // isFullscreen.value = screenfull.isFullscreen
+// }
 
 onMounted(() => {
-  screenfull.on('change', change)
+  // screenfull.on('change', change)
 })
 
 onUnmounted(() => {
-  screenfull.off('change', change)
+  // screenfull.off('change', change)
 })
 
 </script>

@@ -1,5 +1,7 @@
 // token-key
 export const TOKEN = 'token'
+// token-value
+export const TOKEN_VALUE = 'httponlyandmocktoken'
 // token 时间戳
 export const TIME_STAMP = 'timeStamp'
 // 超时时长(毫秒) 两小时

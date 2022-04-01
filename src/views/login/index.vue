@@ -31,6 +31,19 @@
           <!-- <svg-icon icon="https://res.lgdsunday.club/user.svg" /> -->
         </span>
       </el-form-item>
+      <el-form-item prop="username">
+        <span class="svg-container">
+         <svg-icon icon="table"></svg-icon>
+        </span>
+        <el-input
+        v-model="loginForm.captchaCode"
+        placeholder="captchaCode"
+        name="username"
+        type="text" />
+        <span class="show-code">
+          <img :src="verificationImg" alt="" @click="getLoginCaptcha">
+        </span>
+      </el-form-item>
       <el-button
       type="primary"
       style="width: 100%; margin-bottom: 30px"
@@ -48,11 +61,13 @@ import { useI18n } from 'vue-i18n'
 import { ref } from 'vue'
 import { validatePassword } from './rules'
 import { useStore } from 'vuex'
+import { getCode } from '@/api/sys'
 
 const i18n = useI18n()
 const loginForm = ref({
   username: 'super-admin',
-  password: '123456'
+  password: '123456',
+  captchaCode: '6666'
 })
 
 const loginRules = ref({
@@ -77,7 +92,6 @@ const handlerLogin = () => {
   loginFormRef.value.validate(valid => {
     if (!valid) return
     loading.value = true
-    console.log(store)
     store.dispatch('user/login', loginForm.value)
       .then(() => {
         loading.value = false
@@ -88,6 +102,18 @@ const handlerLogin = () => {
       })
   })
 }
+
+const verificationImg = ref('')
+
+// 获取验证码
+const getLoginCaptcha = async () => {
+  const res = await getCode()
+  const base64 = 'data:image/png;base64,' + window.btoa(String.fromCharCode(...new Uint8Array(res)))
+  verificationImg.value = base64
+  console.log(base64)
+}
+
+getLoginCaptcha()
 
 </script>
 
@@ -170,6 +196,17 @@ $cursor: #fff;
     font-size: 16px;
     color: $dark_gray;
     cursor: pointer;
+  }
+
+  .show-code {
+    position: absolute;
+    right: 10px;
+    top: 7px;
+    cursor: pointer;
+    img {
+      width: 120px;
+      height: 40px;
+    }
   }
 }
 </style>
